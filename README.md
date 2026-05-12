@@ -2,7 +2,7 @@
 
 TriSpell is a small and simple console application for basic spell checking.
 
-![Overview](resources/Overview.png)
+![Overview](resources/overview.png)
 
 ## Features
 
@@ -52,8 +52,8 @@ now, simply follow these steps to try out TriSpell:
    choice.
 
    ```shell
-   git clone https://github.com/Piwimau/TriSpell.git ./TriSpell
-   cd ./TriSpell
+   git clone https://github.com/Piwimau/tri-spell.git ./tri-spell
+   cd ./tri-spell
    ```
 
 3. Run the application in release mode to achieve the best performance.
@@ -63,7 +63,7 @@ now, simply follow these steps to try out TriSpell:
    ```
 
 Alternatively, if you have Visual Studio installed on your machine, simply open
-the provided [solution file](TriSpell.slnx) and proceed from there.
+the provided [solution file](tri-spell.slnx) and proceed from there.
 
 ## Contributing
 
