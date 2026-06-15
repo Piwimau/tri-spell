@@ -28,34 +28,34 @@ internal sealed class IterativeOptimizedMatrixEditDistanceCalculator
         ReadOnlySpan<char> target
     ) {
         int size = target.Length + 1;
-        Span<int> previousDistances = (size <= MaxStackAllocLimit)
+        Span<int> prevDists = (size <= MaxStackAllocLimit)
             ? stackalloc int[size]
             : new int[size];
-        Span<int> currentDistances = (size <= MaxStackAllocLimit)
+        Span<int> curDists = (size <= MaxStackAllocLimit)
             ? stackalloc int[size]
             : new int[size];
         // The empty source prefix can only be transformed into target by
         // inserting all characters.
-        for (int j = 0; j < previousDistances.Length; j++) {
-            previousDistances[j] = j;
+        for (int j = 0; j < prevDists.Length; j++) {
+            prevDists[j] = j;
         }
         for (int i = 0; i < source.Length; i++) {
-            currentDistances[0] = i + 1;
+            curDists[0] = i + 1;
             for (int j = 0; j < target.Length; j++) {
-                int insertion = currentDistances[j] + 1;
-                int deletion = previousDistances[j + 1] + 1;
-                int substitution = previousDistances[j]
+                int insert = curDists[j] + 1;
+                int delete = prevDists[j + 1] + 1;
+                int substitute = prevDists[j]
                     + ((source[i] == target[j]) ? 0 : 1);
-                currentDistances[j + 1] = Math.Min(
-                    Math.Min(insertion, deletion),
-                    substitution
+                curDists[j + 1] = Math.Min(
+                    Math.Min(insert, delete),
+                    substitute
                 );
             }
-            Span<int> temp = previousDistances;
-            previousDistances = currentDistances;
-            currentDistances = temp;
+            Span<int> temp = prevDists;
+            prevDists = curDists;
+            curDists = temp;
         }
-        return previousDistances[target.Length];
+        return prevDists[target.Length];
     }
 
 }

@@ -39,10 +39,10 @@ internal sealed class RecursiveEditDistanceCalculator
         // By now we know that at least the first character is different and we
         // can calculate the edit distance by trying out all three possible
         // actions.
-        int insertion = EditDistance(source, target[1..]);
-        int deletion = EditDistance(source[1..], target);
-        int substitution = EditDistance(source[1..], target[1..]);
-        return 1 + Math.Min(Math.Min(insertion, deletion), substitution);
+        int insert = EditDistance(source, target[1..]);
+        int delete = EditDistance(source[1..], target);
+        int substitute = EditDistance(source[1..], target[1..]);
+        return 1 + Math.Min(Math.Min(insert, delete), substitute);
     }
 
 }

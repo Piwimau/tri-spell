@@ -30,41 +30,41 @@ internal sealed class IterativeFullMatrixEditDistanceCalculator
         ReadOnlySpan<char> target
     ) {
         int rows = source.Length + 1;
-        int columns = target.Length + 1;
-        int size = rows * columns;
+        int cols = target.Length + 1;
+        int size = rows * cols;
         // The matrix of edit distances is conceptually two-dimensional, but we
         // use a one-dimensional buffer for improved locality and performance.
         // This also means that we have to do the indexing on our own. The edit
-        // distance at position (i, j) is found at distances[(i * columns) + j].
-        Span<int> distances = (size <= MaxStackAllocLimit)
+        // distance at position `(i, j)` is found at `dists[i * cols + j]`.
+        Span<int> dists = (size <= MaxStackAllocLimit)
             ? stackalloc int[size]
             : new int[size];
-        distances[0] = 0;
+        dists[0] = 0;
         // Source prefixes can only be transformed into an empty string by
         // deleting all characters.
         for (int i = 1; i < rows; i++) {
-            distances[i * columns] = i;
+            dists[i * cols] = i;
         }
         // The empty source prefix can only be transformed into target by
         // inserting all characters.
-        for (int j = 1; j < columns; j++) {
-            distances[j] = j;
+        for (int j = 1; j < cols; j++) {
+            dists[j] = j;
         }
         for (int i = 1; i < rows; i++) {
-            for (int j = 1; j < columns; j++) {
-                int insertion = distances[(i * columns) + (j - 1)] + 1;
-                int deletion = distances[((i - 1) * columns) + j] + 1;
+            for (int j = 1; j < cols; j++) {
+                int insert = dists[i * cols + j - 1] + 1;
+                int delete = dists[(i - 1) * cols + j] + 1;
                 // If the characters match, there is no additional cost for
                 // substitution.
-                int substitution = distances[((i - 1) * columns) + (j - 1)]
+                int substitute = dists[(i - 1) * cols + j - 1]
                     + ((source[i - 1] == target[j - 1]) ? 0 : 1);
-                distances[(i * columns) + j] = Math.Min(
-                    Math.Min(insertion, deletion),
-                    substitution
+                dists[i * cols + j] = Math.Min(
+                    Math.Min(insert, delete),
+                    substitute
                 );
             }
         }
-        return distances[((rows - 1) * columns) + (columns - 1)];
+        return dists[(rows - 1) * cols + cols - 1];
     }
 
 }

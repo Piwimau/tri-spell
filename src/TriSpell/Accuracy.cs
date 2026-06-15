@@ -10,8 +10,8 @@ internal enum Accuracy {
     Low,
 
     /// <summary>
-    /// The medium level of accuracy, which is a compromise between recall and
-    /// precision.
+    /// The medium level of accuracy, which represents a compromise between
+    /// recall and precision.
     /// </summary>
     Medium,
 

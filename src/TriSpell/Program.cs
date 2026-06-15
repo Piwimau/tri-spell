@@ -145,7 +145,7 @@ internal sealed class Program {
         Guard.HasSizeGreaterThanOrEqualTo(options, 2);
         Guard.IsNotNull(optionDescription);
         Console.Clear();
-        int selectedIndex = options
+        int selectedIdx = options
             .Index()
             .First(pair => pair.Item.Equals(defaultOption))
             .Index;
@@ -155,7 +155,7 @@ internal sealed class Program {
             Console.WriteLine();
             for (int i = 0; i < options.Count; i++) {
                 Console.WriteColored("(", ForegroundColor);
-                if (i == selectedIndex) {
+                if (i == selectedIdx) {
                     Console.WriteColored("*", AccentColor);
                 }
                 else {
@@ -179,16 +179,13 @@ internal sealed class Program {
                     selectedOption = default;
                     return false;
                 case ConsoleKey.UpArrow:
-                    selectedIndex = Math.Max(selectedIndex - 1, 0);
+                    selectedIdx = Math.Max(selectedIdx - 1, 0);
                     break;
                 case ConsoleKey.DownArrow:
-                    selectedIndex = Math.Min(
-                        selectedIndex + 1,
-                        options.Count - 1
-                    );
+                    selectedIdx = Math.Min(selectedIdx + 1, options.Count - 1);
                     break;
                 case ConsoleKey.Enter:
-                    selectedOption = options[selectedIndex];
+                    selectedOption = options[selectedIdx];
                     return true;
             }
         }
@@ -239,17 +236,17 @@ internal sealed class Program {
             );
         }
         else {
-            int maxDistance = accuracy.MaxEditDistance(source.Length);
-            IReadOnlyCollection<(string Target, int Distance)> matches = [
+            int maxDist = accuracy.MaxEditDistance(source.Length);
+            IReadOnlyCollection<(string Target, int Dist)> matches = [
                 .. words
                     .Select(
                         target => (
                             Target: target,
-                            Distance: calculator.EditDistance(source, target)
+                            Dist: calculator.EditDistance(source, target)
                         )
                     )
-                    .Where(match => match.Distance <= maxDistance)
-                    .OrderBy(match => match.Distance)
+                    .Where(match => match.Dist <= maxDist)
+                    .OrderBy(match => match.Dist)
                     .ThenBy(match => match.Target)
             ];
             if (matches.Count == 0) {
@@ -284,22 +281,24 @@ internal sealed class Program {
                     maxTargetLength,
                     "Possible Match".Length
                 );
-                foreach ((string target, int distance) in matches) {
+                foreach ((string target, int dist) in matches) {
                     Console.WriteColored(
                         $"{target.PadRight(paddingLength)} | ",
                         ForegroundColor
                     );
                     ConsoleColor foregroundColor;
-                    if (distance <= Accuracy.High.MaxEditDistance(source.Length)) {
+                    if (dist <= Accuracy.High.MaxEditDistance(source.Length)) {
                         foregroundColor = ConsoleColor.Green;
                     }
-                    else if (distance <= Accuracy.Medium.MaxEditDistance(source.Length)) {
+                    else if (
+                        dist <= Accuracy.Medium.MaxEditDistance(source.Length)
+                    ) {
                         foregroundColor = ConsoleColor.Yellow;
                     }
                     else {
                         foregroundColor = ConsoleColor.Red;
                     }
-                    Console.WriteLineColored($"{distance}", foregroundColor);
+                    Console.WriteLineColored($"{dist}", foregroundColor);
                 }
             }
         }
@@ -311,8 +310,8 @@ internal sealed class Program {
     private static void Main() {
         IReadOnlySet<string> words = File.ReadLines(DictionaryPath)
             .ToFrozenSet();
-        ConsoleColor previousForegroundColor = Console.ForegroundColor;
-        ConsoleColor previousBackgroundColor = Console.BackgroundColor;
+        ConsoleColor prevForegroundColor = Console.ForegroundColor;
+        ConsoleColor prevBackgroundColor = Console.BackgroundColor;
         Console.CursorVisible = false;
         Console.ForegroundColor = ForegroundColor;
         Console.BackgroundColor = BackgroundColor;
@@ -333,8 +332,8 @@ internal sealed class Program {
             switch (Console.ReadKey(true).Key) {
                 case ConsoleKey.Escape:
                     Console.CursorVisible = true;
-                    Console.ForegroundColor = previousForegroundColor;
-                    Console.BackgroundColor = previousBackgroundColor;
+                    Console.ForegroundColor = prevForegroundColor;
+                    Console.BackgroundColor = prevBackgroundColor;
                     return;
                 case ConsoleKey.D1: {
                     bool selectionConfirmed = TrySelectOption(

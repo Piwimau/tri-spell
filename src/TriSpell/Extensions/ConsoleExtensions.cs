@@ -3,7 +3,7 @@ using CommunityToolkit.Diagnostics;
 
 namespace TriSpell.Extensions;
 
-/// <summary>Contains useful extensions for the <see cref="Console"/>.</summary>
+/// <summary>Contains extensions for the <see cref="Console"/> class.</summary>
 internal static class ConsoleExtensions {
 
     extension(Console) {
@@ -31,10 +31,10 @@ internal static class ConsoleExtensions {
             ConsoleColor foregroundColor
         ) {
             Guard.IsNotNull(text);
-            ConsoleColor previousForegroundColor = Console.ForegroundColor;
+            ConsoleColor prev = Console.ForegroundColor;
             Console.ForegroundColor = foregroundColor;
             Console.Write(text);
-            Console.ForegroundColor = previousForegroundColor;
+            Console.ForegroundColor = prev;
         }
 
         /// <summary>
@@ -60,10 +60,10 @@ internal static class ConsoleExtensions {
             ConsoleColor foregroundColor
         ) {
             Guard.IsNotNull(text);
-            ConsoleColor previousForegroundColor = Console.ForegroundColor;
+            ConsoleColor prev = Console.ForegroundColor;
             Console.ForegroundColor = foregroundColor;
             Console.WriteLine(text);
-            Console.ForegroundColor = previousForegroundColor;
+            Console.ForegroundColor = prev;
         }
 
     }

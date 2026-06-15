@@ -4,7 +4,7 @@ TriSpell is a small and simple console application for basic spell checking.
 
 ![Overview](resources/overview.png)
 
-## Features
+## About the Project
 
 As a fun little side project of mine, TriSpell was intended to explore how basic
 spell checking could be implemented using the so-called [Levenshtein
@@ -18,7 +18,7 @@ in 1965, this metric computes the similarity of two sequences of characters
   misspelled).
 
 The metric itself, sometimes simply called "edit distance", is defined as the
-minimum number of single-character edits (i. e. insertions, deletions, or
+minimum number of single-character edits (i.e., insertions, deletions, or
 substitutions) required to transform the source string into the target string.
 It can be implemented using a variety of different algorithms, and as such
 TriSpell offers three of the more common implementations for the user to choose
@@ -39,7 +39,7 @@ of accuracy. The lower the accuracy, the more (possibly irrelevant) possible
 matches are found. The higher the accuracy, the less (but likely more relevant)
 possible matches are found.
 
-## Dependencies and Usage
+## Usage
 
 TriSpell was originally developed using `.NET 8` and `C# 12`. I recently
 upgraded it to `.NET 10` and `C# 14` and plan to continue doing so in the future
@@ -63,7 +63,7 @@ now, simply follow these steps to try out TriSpell:
    ```
 
 Alternatively, if you have Visual Studio installed on your machine, simply open
-the provided [solution file](tri-spell.slnx) and proceed from there.
+the provided [solution file](TriSpell.slnx) and proceed from there.
 
 ## Contributing
 
@@ -80,7 +80,7 @@ animations and explanations of the algorithms. I can highly recommend the video
 and the channel in general for anyone interested in low-level programming
 concepts.
 
-TriSpell uses a dictionary of english words which is licensed under the
+TriSpell uses a dictionary of English words which is licensed under the
 [Unlicense](https://unlicense.org) and can be found
 [here](https://github.com/dwyl/english-words).
 

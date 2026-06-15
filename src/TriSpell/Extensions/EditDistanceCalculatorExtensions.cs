@@ -4,7 +4,7 @@ using TriSpell.EditDistanceCalculators;
 namespace TriSpell.Extensions;
 
 /// <summary>
-/// Contains useful extensions for an <see cref="IEditDistanceCalculator"/>.
+/// Contains extensions for an <see cref="IEditDistanceCalculator"/>.
 /// </summary>
 internal static class EditDistanceCalculatorExtensions {
 

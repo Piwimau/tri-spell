@@ -3,7 +3,7 @@ using CommunityToolkit.Diagnostics;
 
 namespace TriSpell.Extensions;
 
-/// <summary>Contains useful extensions for an <see cref="Accuracy"/>.</summary>
+/// <summary>Contains extensions for an <see cref="Accuracy"/>.</summary>
 internal static class AccuracyExtensions {
 
     extension(Accuracy accuracy) {
@@ -32,7 +32,7 @@ internal static class AccuracyExtensions {
         /// </exception>
         public int MaxEditDistance(int length) {
             Guard.IsGreaterThanOrEqualTo(length, 0);
-            (double scale, int minDistance, int maxDistance) = accuracy switch {
+            (double scale, int minDist, int maxDist) = accuracy switch {
                 Accuracy.Low => (0.45, 2, 5),
                 Accuracy.Medium => (0.35, 1, 3),
                 Accuracy.High => (0.25, 0, 2),
@@ -40,8 +40,8 @@ internal static class AccuracyExtensions {
             };
             return Math.Clamp(
                 (int) Math.Ceiling(length * scale),
-                minDistance,
-                maxDistance
+                minDist,
+                maxDist
             );
         }
 
