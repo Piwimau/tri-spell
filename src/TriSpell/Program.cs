@@ -11,7 +11,7 @@ using TriSpell.Extensions;
 
 namespace TriSpell;
 
-internal sealed class Program {
+internal static class Program {
 
     /// <summary>The default foreground color of the console output.</summary>
     private const ConsoleColor ForegroundColor = ConsoleColor.White;
@@ -47,16 +47,16 @@ internal sealed class Program {
         Console.Clear();
         Console.WriteLineColored(
             """
-            ▄▄▄█████▓ ██▀███   ██▓  ██████  ██▓███  ▓█████  ██▓     ██▓    
-             ▓  ██▒ ▓▒▓██ ▒ ██▒▓██▒▒██    ▒ ▓██░  ██▒▓█   ▀ ▓██▒    ▓██▒    
-             ▒ ▓██░ ▒░▓██ ░▄█ ▒▒██▒░ ▓██▄   ▓██░ ██▓▒▒███   ▒██░    ▒██░    
-             ░ ▓██▓ ░ ▒██▀▀█▄  ░██░  ▒   ██▒▒██▄█▓▒ ▒▒▓█  ▄ ▒██░    ▒██░    
+            ▄▄▄█████▓ ██▀███   ██▓  ██████  ██▓███  ▓█████  ██▓     ██▓
+             ▓  ██▒ ▓▒▓██ ▒ ██▒▓██▒▒██    ▒ ▓██░  ██▒▓█   ▀ ▓██▒    ▓██▒
+             ▒ ▓██░ ▒░▓██ ░▄█ ▒▒██▒░ ▓██▄   ▓██░ ██▓▒▒███   ▒██░    ▒██░
+             ░ ▓██▓ ░ ▒██▀▀█▄  ░██░  ▒   ██▒▒██▄█▓▒ ▒▒▓█  ▄ ▒██░    ▒██░
                ▒██▒ ░ ░██▓ ▒██▒░██░▒██████▒▒▒██▒ ░  ░░▒████▒░██████▒░██████▒
                ▒ ░░   ░ ▒▓ ░▒▓░░▓  ▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░░░ ▒░ ░░ ▒░▓  ░░ ▒░▓  ░
                  ░      ░▒ ░ ▒░ ▒ ░░ ░▒  ░ ░░▒ ░      ░ ░  ░░ ░ ▒  ░░ ░ ▒  ░
-               ░        ░░   ░  ▒ ░░  ░  ░  ░░          ░     ░ ░     ░ ░   
+               ░        ░░   ░  ▒ ░░  ░  ░  ░░          ░     ░ ░     ░ ░
                          ░      ░        ░              ░  ░    ░  ░    ░  ░
-            
+
             """,
             AccentColor
         );

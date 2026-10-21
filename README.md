@@ -4,31 +4,30 @@ TriSpell is a small and simple console application for basic spell checking.
 
 ![Overview](resources/overview.png)
 
-## About the Project
+## What Is TriSpell?
 
-As a fun little side project of mine, TriSpell was intended to explore how basic
-spell checking could be implemented using the so-called [Levenshtein
+TriSpell was a little side project of mine, as part of which I wanted to explore
+how basic spell checking could be implemented using the so-called [Levenshtein
 distance](https://en.wikipedia.org/wiki/Levenshtein_distance) metric. Named
 after the Soviet mathematician Vladimir Levenshtein, who originally defined it
-in 1965, this metric computes the similarity of two sequences of characters
-("strings" in most modern programming languages):
+in 1965, this metric computes the similarity of two characters sequences (or
+_strings_ in the terminology of modern programming languages):
 
-* A source string that can be thought of as a word which the user typed.
+* A source string that can be thought of as a word the user typed.
 * A target string that represents a word the user may have intended to type (but
   misspelled).
 
-The metric itself, sometimes simply called "edit distance", is defined as the
+The metric itself, sometimes simply called _edit distance_, is defined as the
 minimum number of single-character edits (i.e., insertions, deletions, or
 substitutions) required to transform the source string into the target string.
-It can be implemented using a variety of different algorithms, and as such
-TriSpell offers three of the more common implementations for the user to choose
-from:
+It can be implemented using a variety of different algorithms, three of which
+are provided by TriSpell for the user to choose from:
 
 | Algorithm                  | Efficiency | Description                                                                                                                                                                                                                                                                                                                                   |
 |----------------------------|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Recursive                  | --         | A naive, recursive implementation that more or less directly corresponds to the original mathematical definition by Vladimir Levenshtein. It shows a very poor efficiency (especially on larger inputs), since a lot of the prefixes of the source and target strings are unnecessarily compared more than once (unless memoization is used). |
-| Iterative Full Matrix      | +          | This slightly more advanced implementation employs techniques of dynamic programming. It uses a two-dimensional matrix to cache the edit distances between all prefixes of the source and target strings, thus avoiding unnecessary calculations.                                                                                             |
-| Iterative Optimized Matrix | ++         | Even more advanced implementation that makes use of an important optimization: For calculating the edit distance at a certain position, only the previous and current row of edit distances are ever needed. This usually reduces the memory footprint and runtime even further in comparison to the full matrix algorithm.                   |
+| Recursive                  | Low        | A naive, recursive implementation that more or less directly corresponds to the original mathematical definition by Vladimir Levenshtein. It shows a very poor efficiency (especially on larger inputs), since a lot of the prefixes of the source and target strings are unnecessarily compared more than once (unless memoization is used). |
+| Iterative Full Matrix      | Medium     | This slightly more advanced implementation employs techniques of dynamic programming. It uses a two-dimensional matrix to cache the edit distances between all prefixes of the source and target strings, thus avoiding unnecessary calculations.                                                                                             |
+| Iterative Optimized Matrix | High       | An even more advanced implementation that makes use of an important optimization: For calculating the edit distance at a certain position, only the previous and current row of edit distances are ever needed. This usually reduces the memory footprint and runtime even further in comparison to the full matrix algorithm.                |
 
 For more details on the individual algorithms see [this
 article](https://en.wikipedia.org/wiki/Levenshtein_distance), which also
@@ -59,21 +58,15 @@ now, simply follow these steps to try out TriSpell:
 3. Run the application in release mode to achieve the best performance.
 
    ```shell
-   dotnet run --configuration Release --project src/TriSpell
+   dotnet run --project src/TriSpell -c Release
    ```
 
 Alternatively, if you have Visual Studio installed on your machine, simply open
-the provided [solution file](TriSpell.slnx) and proceed from there.
-
-## Contributing
-
-I don't really expect any contributions, as TriSpell is more or less just one of
-my little side projects. However, if you find a bug or have a nice suggestion,
-feel free to open an issue and I'll see what I can do.
+the [solution file](TriSpell.slnx) and proceed from there.
 
 ## Acknowledgements
 
-I was originally inspired to create TriSpell after watching [this
+I was inspired to create TriSpell after watching [this
 video](https://www.youtube.com/watch?v=Cu7Tl7FGigQ) by
 [Creel](https://www.youtube.com/@WhatsACreel), which features some nice
 animations and explanations of the algorithms. I can highly recommend the video
